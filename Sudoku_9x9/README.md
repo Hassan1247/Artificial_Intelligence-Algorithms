@@ -22,21 +22,27 @@ In this section we update the section 2 file with Least constrained value (LCV).
 
 In this section we update the section 3 file with Arc Consistency Algorithm #3 (AC-3).
 
-5.reprtive.py
-6.addFeature.py
-7.newAC3.py
-8.py
+## Sample inputs:
 
-## The sample inputs:
-
- The sample inputs are `input1` , `input2` and `input3` files you can run the programms in UNIX with this:
+ The sample inputs are `input1` , `input2` and `input3` files, you can run the programms in UNIX with this:
 
 ```bash
 python 2.mrv.py < input1
 ```
-the `input1` file is an easy sudoku.
+The `input1` file is an easy sudoku.
 
-After section 3 the app is very slow so it's better to use
+After section 3 the app is slow so it's better to use pypy instead:
+
+```bash
+pypy3 4.ac3.py < input1
+```
+
+## Sample output:
+
+> pypy3 3.lcv.py < input2
+
+![Output](sample_output.png)
+
 ### Empty sudoku
 
 You can copy this to solve the empty sudoku:
