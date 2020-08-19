@@ -61,7 +61,8 @@ def solve(x, y, sudoku, possible):
                 x += 1
                 y = 0
 
-        # fill the empty cell with 1 to 9
+        # fill the empty cell with 1 to 9 in the possible_copy
+        # the possible_copy may only have 1, 2, 3        
         for k in possible_copy[x][y]:
             sudoku_copy[x][y] = k
             # fill(change) the possibilities of other cells
@@ -111,6 +112,8 @@ def check(sudoku, possible):
             if sudoku[i][j] != 0:
                 continue
             # forward checknig part
+            # if for an empty cell we don't have
+            # any possibility so the answer is werong
             if possible[i][j] == []:
                 return False
     #row

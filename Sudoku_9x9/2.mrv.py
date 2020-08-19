@@ -48,33 +48,36 @@ def printsudoku(sudoku):
 def solve(x, y, sudoku, possible):
     global SOLVED, NUMBER_OF_NODES
     NUMBER_OF_NODES += 1
-    # if the number we place is ok and the sudoku hasn't been solved
-    if check(sudoku, possible) and not SOLVED:
-        # make a copy of previous sudoku
-        sudoku_copy = copy.deepcopy(sudoku)
-        possible_copy = copy.deepcopy(possible)
+    
+    # make a copy of previous sudoku
+    sudoku_copy = copy.deepcopy(sudoku)
+    possible_copy = copy.deepcopy(possible)
 
-        # mrv part, a list to save all possibilites from all cells
-        l = []
-        for i in range(9):
-            for j in range(9):
-                if sudoku_copy[i][j] != 0:
-                    continue
-                l.append((len(possible_copy[i][j]), i, j))
-        l = sorted(l)
+    # mrv part, a list to save all possibilites from all cells
+    l = []
+    for i in range(9):
+        for j in range(9):
+            if sudoku_copy[i][j] != 0:
+                continue
+            l.append((len(possible_copy[i][j]), i, j))
+    # we sort the possibilities to find out which cell
+    # has the minimum possiblitie so if one cell has
+    # like 1, 2 possibility we fill them first
+    l = sorted(l)
 
-        len_of_cell, i, j = l[0]
-        # fill the empty cell with 1 to 9
-        for k in possible_copy[i][j]:
-            sudoku_copy[i][j] = k
-            # fill(change) the possibilities of other cells
-            fillPossibleArray(sudoku_copy, possible_copy)
-            # i have check again because i want go to the next cell
-            if check(sudoku_copy, possible_copy) and not SOLVED:
-                # go to the next cell
-                solve(l[1][1], l[1][2], sudoku_copy, possible_copy)
-            if SOLVED:
-                return
+    len_of_cell, i, j = l[0]
+    # fill the empty cell with 1 to 9 in the possible_copy
+    # the possible_copy may only have 1, 2, 3        
+    for k in possible_copy[i][j]:
+        sudoku_copy[i][j] = k
+        # fill(change) the possibilities of other cells
+        fillPossibleArray(sudoku_copy, possible_copy)
+        # if the number we place is ok and the sudoku hasn't been solved
+        if check(sudoku_copy, possible_copy) and not SOLVED:
+            # go to the next cell
+            solve(l[1][1], l[1][2], sudoku_copy, possible_copy)
+        if SOLVED:
+            return
 
 # in this function we fill the possible array with possible numbers that can place in a cell
 def fillPossibleArray(sudoku, possible):
@@ -112,6 +115,8 @@ def check(sudoku, possible):
             if sudoku[i][j] != 0:
                 continue
             # forward checknig part
+            # if for an empty cell we don't have
+            # any possibility so the answer is werong
             if possible[i][j] == []:
                 return False
     #row
@@ -196,3 +201,16 @@ solve(l[0][1], l[0][2], sudoku, possible)
 # at the end print the number of nodes that we make through the algo with bachtrack
 print()
 print('Number of nodes : ', NUMBER_OF_NODES)
+
+"""
+for empty sudoku
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+.........
+"""
