@@ -94,18 +94,17 @@ def solve(x, y, sudoku, possible):
                 solve(l[1][1], l[1][2], sudoku_copy, possible_copy)
             if SOLVED:
                 return
-    else:
-        # if the possible_copy was empty do nothing
-        for k in possible_copy[i][j]:
-            sudoku_copy[i][j] = k
-                # fill(change) the possibilities of other cells
-            fillPossibleArray(sudoku_copy, possible_copy)
-            # if the number we place is ok and the sudoku hasn't been solved
-            if check(sudoku_copy, possible_copy) and not SOLVED:
-                # go to the next cell
-                solve(l[1][1], l[1][2], sudoku_copy, possible_copy)
-            if SOLVED:
-                return
+    # if the possible_copy was empty do nothing
+    elif possible_copy[i][j] != []:
+        sudoku_copy[i][j] = possible_copy[i][j][0]
+        # fill(change) the possibilities of other cells
+        fillPossibleArray(sudoku_copy, possible_copy)
+        # if the number we place is ok and the sudoku hasn't been solved
+        if check(sudoku_copy, possible_copy) and not SOLVED:
+            # go to the next cell
+            solve(l[1][1], l[1][2], sudoku_copy, possible_copy)
+        if SOLVED:
+            return
 
 def fillPossibleArray(sudoku, possible):
     # sum of all the possiblities of all cells    
@@ -228,12 +227,14 @@ for i in range(9):
         l.append((len(possible[i][j]), i, j))
 l = sorted(l)
 
-# solve from location that has the least possible numbers with sudoku and possible
-solve(l[0][1], l[0][2], sudoku, possible)
-# at the end print the number of nodes that we make through the algo with bachtrack
-print()
-print('Number of nodes : ', NUMBER_OF_NODES)
-
+if check(sudoku, possible):
+    # solve from location that has the least possible numbers with sudoku and possible
+    solve(l[0][1], l[0][2], sudoku, possible)
+    # at the end print the number of nodes that we make through the algo with bachtrack
+    print()
+    print('Number of nodes : ', NUMBER_OF_NODES)
+else:
+    print('The sudoku can not be solved !')
 """
 for empty sudoku
 .........

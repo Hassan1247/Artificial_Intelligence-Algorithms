@@ -180,11 +180,14 @@ for i in range(9):
 inputsudoku(sudoku)
 
 fillPossibleArray(sudoku, possible)
-# solve from location 0,0 with sudoku and possible
-solve(0, 0, sudoku, possible)
-# at the end print the number of nodes that we make through the algo with bachtrack
-print()
-print('Number of nodes : ', NUMBER_OF_NODES)
+if check(sudoku, possible):
+    # solve from location 0,0 with sudoku and possible
+    solve(0, 0, sudoku, possible)
+    # at the end print the number of nodes that we make through the algo with bachtrack
+    print()
+    print('Number of nodes : ', NUMBER_OF_NODES)
+else:
+    print('The sudoku can not be solved !')
 
 """
 for empty sudoku

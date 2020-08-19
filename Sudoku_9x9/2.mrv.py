@@ -196,12 +196,14 @@ for i in range(9):
         l.append((len(possible[i][j]), i, j))
 l = sorted(l)
 
-# solve from location that has the least possible numbers with sudoku and possible
-solve(l[0][1], l[0][2], sudoku, possible)
-# at the end print the number of nodes that we make through the algo with bachtrack
-print()
-print('Number of nodes : ', NUMBER_OF_NODES)
-
+if check(sudoku, possible):
+    # solve from location that has the least possible numbers with sudoku and possible
+    solve(l[0][1], l[0][2], sudoku, possible)
+    # at the end print the number of nodes that we make through the algo with bachtrack
+    print()
+    print('Number of nodes : ', NUMBER_OF_NODES)
+else:
+    print('The sudoku can not be solved !')
 """
 for empty sudoku
 .........
