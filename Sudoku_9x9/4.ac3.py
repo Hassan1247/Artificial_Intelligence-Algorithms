@@ -47,14 +47,14 @@ def printsudoku(sudoku):
 # solve the sudoku using only backtrack and forward checking (backtrack part)
 def solve(x, y, sudoku, possible):
     global SOLVED, NUMBER_OF_NODES
-    NUMBER_OF_NODES += 1    
+    NUMBER_OF_NODES += 1
     # make a copy of previous sudoku
     sudoku_copy = copy.deepcopy(sudoku)
     possible_copy = copy.deepcopy(possible)
 
     # AC-3
     # for each possibility put that number in cell
-    # and check whether this possiblity is good or not
+    # and check whether this possiblity is solvable or not
     # in the next step
     for i in range(9):
         for j in range(9):
@@ -68,7 +68,7 @@ def solve(x, y, sudoku, possible):
                         fillPossibleNode(i, j, sudoku_copy2, possible_copy2)
                         if not fcCheck(i, j, sudoku_copy2, possible_copy2):
                             possible_copy[i][j].remove(k)
-    
+
     # mrv part, a list to save all possibilites from all cells
     l = []
     for i in range(9):
@@ -85,7 +85,7 @@ def solve(x, y, sudoku, possible):
     # lcv part
     # if the possiblity of the cell is more than one
     # so we choose the one that prudoces less possibilites
-    # in the next step 
+    # in the next step
     if len_of_cell > 1:
         list_of_possibles = []
         # we select each possibility for cell
@@ -97,11 +97,11 @@ def solve(x, y, sudoku, possible):
             sudoku_copy2[i][j] = k
             q = fillPossibleNode(i, j, sudoku_copy2, possible_copy2)
             # number of all possibilities and the number of that cell
-            list_of_possibles.append((q, k)) 
+            list_of_possibles.append((q, k))
         # sort the list_of_possibles
-        list_of_possibles = sorted(list_of_possibles,reverse=True)
+        list_of_possibles = sorted(list_of_possibles, reverse=True)
 
-        for q,k in list_of_possibles:
+        for q, k in list_of_possibles:
             sudoku_copy[i][j] = k
             # fill(change) the possibilities of other cells
             fillPossibleNode(i, j, sudoku_copy, possible_copy)
@@ -123,19 +123,19 @@ def solve(x, y, sudoku, possible):
         if SOLVED:
             return
 
-# for inner loop i use this function 
+# for inner loop i use this function
 # because each change only change some of
 # the cells not all of them
 def fillPossibleNode(x, y, sudoku, possible):
     sum = 0
-    lis = [[0,1,2],[3,4,5],[6,7,8]]
+    lis = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
     #column
     j = y
     for i in range(9):
         if sudoku[i][j] != 0:
             continue
         #list of possible numbers
-        l = [1,2,3,4,5,6,7,8,9]
+        l = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         #row
         for k in range(9):
             if sudoku[i][k] in l:
@@ -156,7 +156,7 @@ def fillPossibleNode(x, y, sudoku, possible):
         if sudoku[i][j] != 0:
             continue
         #list of possible numbers
-        l = [1,2,3,4,5,6,7,8,9]
+        l = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         #row
         for k in range(9):
             if sudoku[i][k] in l:
@@ -166,7 +166,6 @@ def fillPossibleNode(x, y, sudoku, possible):
             if sudoku[k][j] in l:
                 l.remove(sudoku[k][j])
         #3*3
-        lis = [[0,1,2],[3,4,5],[6,7,8]]
         for ii in lis[i//3]:
             for jj in lis[j//3]:
                 if sudoku[ii][jj] in l:
@@ -178,7 +177,7 @@ def fillPossibleNode(x, y, sudoku, possible):
             if sudoku[i][j] != 0:
                 continue
             #list of possible numbers
-            l = [1,2,3,4,5,6,7,8,9]
+            l = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             #row
             for k in range(9):
                 if sudoku[i][k] in l:
@@ -188,7 +187,6 @@ def fillPossibleNode(x, y, sudoku, possible):
                 if sudoku[k][j] in l:
                     l.remove(sudoku[k][j])
             #3*3
-            lis = [[0,1,2],[3,4,5],[6,7,8]]
             for ii in lis[i//3]:
                 for jj in lis[j//3]:
                     if sudoku[ii][jj] in l:
@@ -200,7 +198,7 @@ def fillPossibleNode(x, y, sudoku, possible):
     return sum
 
 def fillPossibleArray(sudoku, possible):
-    # sum of all the possiblities of all cells    
+    # sum of all the possiblities of all cells
     sum = 0
     # for all cells
     for i in range(9):
@@ -248,7 +246,7 @@ def fcCheck(x, y, sudoku, possible):
         if possible[i][j] == []:
             return False
     # the 3x3 of changed cell
-    lis = [[0,1,2],[3,4,5],[6,7,8]]
+    lis = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
     for i in lis[x//3]:
         for j in lis[y//3]:
             if sudoku[i][j] != 0:
@@ -298,7 +296,7 @@ def check(sudoku, possible):
                 return False
     #3*3
     for i in range(0, 9, 3):
-    	for j in range(0, 9, 3):
+        for j in range(0, 9, 3):
             se = set()
             lis = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
             for ii in lis[i//3]:
@@ -360,6 +358,7 @@ if check(sudoku, possible):
     print('Number of nodes : ', NUMBER_OF_NODES)
 else:
     print('The sudoku can not be solved !')
+
 """
 for empty sudoku
 .........

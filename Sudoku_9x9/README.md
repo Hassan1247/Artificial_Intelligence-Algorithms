@@ -1,5 +1,4 @@
 # Sudoku 9*9 with Python
-----------------------------------------------------------------------
 A useful website to ceate and solve sudukos : [qqwing](https://qqwing.com/)
 
 If you want to know about the algorithms and heuristics you should search the web or read 
@@ -20,7 +19,11 @@ In this section we update the section 2 file with Least constrained value (LCV).
 
 ## Section 4 : Arc Consistency Algorithm #3 `4.ac3.py`
 
-In this section we update the section 3 file with Arc Consistency Algorithm #3 (AC-3).
+In this section we update the section 3 file with Arc Consistency Algorithm #3 (AC-3) I don't use queue in this section.
+
+## Section 5 : Arc Consistency Algorithm #3 Complete `5.ac3Comp.py`
+
+In this section we update the section 4 file with Arc Consistency Algorithm #3 Complete (AC-3) I use queue to keep track of changed cells that need to be checked in AC-3 again.
 
 ## Sample inputs:
 
@@ -43,7 +46,7 @@ pypy3 4.ac3.py < input1
 
 ![Output](sample_output.png)
 
-### Empty sudoku
+## Empty sudoku
 
 You can copy this to solve the empty sudoku:
 

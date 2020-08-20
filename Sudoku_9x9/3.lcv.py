@@ -47,7 +47,7 @@ def printsudoku(sudoku):
 # solve the sudoku using only backtrack and forward checking (backtrack part)
 def solve(x, y, sudoku, possible):
     global SOLVED, NUMBER_OF_NODES
-    NUMBER_OF_NODES += 1    
+    NUMBER_OF_NODES += 1
     # make a copy of previous sudoku
     sudoku_copy = copy.deepcopy(sudoku)
     possible_copy = copy.deepcopy(possible)
@@ -77,14 +77,14 @@ def solve(x, y, sudoku, possible):
             sudoku_copy[i][j] = k
             q = fillPossibleArray(sudoku_copy, possible_copy)
             # number of all possibilities and the number of that cell
-            list_of_possibles.append((q, k)) 
+            list_of_possibles.append((q, k))
             # make it zero for the next one
             sudoku_copy[i][j] = 0
             fillPossibleArray(sudoku_copy, possible_copy)
         # sort the list_of_possibles
-        list_of_possibles = sorted(list_of_possibles,reverse=True)
+        list_of_possibles = sorted(list_of_possibles, reverse=True)
 
-        for q,k in list_of_possibles:
+        for q, k in list_of_possibles:
             sudoku_copy[i][j] = k
             # fill(change) the possibilities of other cells
             fillPossibleArray(sudoku_copy, possible_copy)
@@ -107,7 +107,7 @@ def solve(x, y, sudoku, possible):
             return
 
 def fillPossibleArray(sudoku, possible):
-    # sum of all the possiblities of all cells    
+    # sum of all the possiblities of all cells
     sum = 0
     # for all cells
     for i in range(9):
@@ -235,6 +235,7 @@ if check(sudoku, possible):
     print('Number of nodes : ', NUMBER_OF_NODES)
 else:
     print('The sudoku can not be solved !')
+
 """
 for empty sudoku
 .........
